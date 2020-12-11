@@ -13,6 +13,7 @@ $pdo = DBFactory::getMysqlConnexionWithPDO();
 
 $manager = new NewsManagerPDO($pdo);
 
+$page='index';
 include 'component/header.php'
 ?>
 

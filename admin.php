@@ -6,6 +6,42 @@ function autoload($classname)
 
 spl_autoload_register('autoload');
 
+$page='admin';
+include 'component/header.php';
+
+$errorConnexion = '';
+
+if(isset($_GET['disconnect'])){
+    session_destroy();
+    header('Location: .');
+    exit();
+}
+
+if (isset($_POST['username']) && isset($_POST['password'])) {
+    if ($_POST['username'] === 'admin' && $_POST['password'] === 'admin') {
+        $_SESSION['connected'] = 'connected';
+    } else {
+        $errorConnexion = '<p class="text-danger">Identifiant ou Mot de passe incorrect</p>';
+    }
+}
+
+if (!isset($_SESSION['connected'])) { ?>
+    <main class="container">
+        <?= $errorConnexion ?>
+        <form action="admin.php" method="post" class="mt-3">
+            <div class="mb-3">
+                <label for="username" class="form-label">Identifiant</label>
+                <input type="text" class="form-control" id="username" name="username">
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Mot de passe</label>
+                <input type="password" class="form-control" id="password" name="password">
+            </div>
+            <button type="submit" class="btn btn-success">Se connecter</button>
+        </form>
+    </main>
+<?php } else {
+
 $pdo = DBFactory::getMysqlConnexionWithPDO();
 
 $manager = new NewsManagerPDO($pdo);
@@ -24,8 +60,12 @@ if (isset($_POST['author'])) {
     $manager->save($news);
 }
 
-include 'component/header.php'
 ?>
+<div class="mt-3">
+    <form action="" method="">
+        <a href="?disconnect=y" class="float-end me-5 btn btn-sm btn-danger">Se déconnecter</a>
+    </form>
+</div>
 
 <?php if ((isset($_GET['edit']) && preg_match('#^[0-9]+$#', $_GET['edit']) === 1) ||
 isset($_GET['new'])) {
@@ -81,6 +121,7 @@ if (!isset($_GET['new'])) {
                 $news->getAuthor() . '</span> le ' . $dates['dateCreated'] . ' à ' . $dates['timeCreated'] . ', modifié le ' .
                 $dates['dateModified'] . ' à ' . $dates['timeModified'] . '</small></div>' .
                 '<input type="hidden" class="title4js" value="' . $news->getTitle() . '"></div>';
+        }
         }
         }
         include 'component/footer.php' ?>
