@@ -2,8 +2,7 @@
 ## PHP - Use of databases
 Practice of PHP to use 
   * Databases with PDO
-  * Abstract class
+  * Abstract class (Entity, Manager)
   * Static methods
   
-I also used a tiny bit of JavaScript.
- 
+I also used  a little bit of Bootstrap and JavaScript
