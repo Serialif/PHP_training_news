@@ -12,4 +12,4 @@
   * addEventListener()
   * preventDefault()
   
-###I also use a bit of Bootstrap
+### I also use a bit of Bootstrap
