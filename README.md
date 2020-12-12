@@ -1,5 +1,4 @@
 # Training : Chat
-## PHP - Use of databases
 
 *To practice, I rewrite the code for each project, I don't use copy/paste*.
 
@@ -8,4 +7,9 @@
   * Abstract class (Entity, Manager)
   * Static methods
   
-I also use a bit of Bootstrap and JavaScript
+### Practice of Javascript to use 
+  * getElementsByClassName()
+  * addEventListener()
+  * preventDefault()
+  
+###I also use a bit of Bootstrap
