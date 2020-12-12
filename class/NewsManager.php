@@ -6,9 +6,9 @@ abstract class NewsManager
     public function save(NewsEntity $news){
         if($news->isValid()){
           if($news->exist()){
-              $this->add($news);
-          }  else{
               $this->update($news);
+          }  else{
+              $this->add($news);
           }
         }
     }

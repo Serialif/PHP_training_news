@@ -47,7 +47,7 @@ abstract class Entity
      */
     public function exist(): bool
     {
-        return empty($this->id);
+        return !empty($this->id);
     }
 
     /**
