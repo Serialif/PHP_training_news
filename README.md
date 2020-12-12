@@ -1,4 +1,4 @@
-# Training : Chat
+# Training : News
 
 *To practice, I rewrite the code for each project, I don't use copy/paste*.
 
