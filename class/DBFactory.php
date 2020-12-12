@@ -18,7 +18,7 @@ class DBFactory
           title varchar(100) NOT NULL,
           content text NOT NULL,
           createdAt datetime NOT NULL,
-          ModifiedAt datetime NOT NULL,
+          modifiedAt datetime NOT NULL,
           PRIMARY KEY (id)) DEFAULT CHARSET=utf8;');
     }
 

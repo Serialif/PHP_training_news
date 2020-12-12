@@ -6,12 +6,12 @@ function autoload($classname)
 
 spl_autoload_register('autoload');
 
-$page='admin';
+$page = 'admin';
 include 'component/header.php';
 
 $errorConnexion = '';
 
-if(isset($_GET['disconnect'])){
+if (isset($_GET['disconnect'])) {
     session_destroy();
     header('Location: .');
     exit();
@@ -100,27 +100,29 @@ if (!isset($_GET['new'])) {
     </form>
     <?php } else { ?>
     <main class="container">
-        <div class="card m-3 p-3 shadow w-auto">
+        <div class="d-grid gap-1 py-3">
             <a href="?new=y" class="btn btn-success">Nouvelle News</a>
         </div>
         <?php
         $newss = $manager->getList();
-        foreach ($newss as $news) {
-            $dates = DateManipulation::getDates($news);
-            $content = $news->getContent();
-            if (strlen($content) > 200) {
-                $content = substr($content, 0, 199) . '...';
+        if (!empty($newss)) {
+            foreach ($newss as $news) {
+                $dates = DateManipulation::getDates($news);
+                $content = $news->getContent();
+                if (strlen($content) > 200) {
+                    $content = substr($content, 0, 199) . '...';
+                }
+                echo '<div class="card m-3 p-3 shadow w-auto">' .
+                    '<div class="fw-bold mb-3">' . $news->getTitle() . '
+                    <span class="float-end">
+                        <a href="?edit=' . $news->getId() . '" class="btn btn-sm btn-warning">Modifier</a>
+                        <a href="?delete=' . $news->getId() . '" class="btn btn-sm btn-danger delete">Supprimer</a>
+                    </span></div><div>' . $content . '</div>' .
+                    '<div class="text-end fst-italic text-muted fs-6"> <small>créé par <span class="fw-bold">' .
+                    $news->getAuthor() . '</span> le ' . $dates['dateCreated'] . ' à ' . $dates['timeCreated'] . ', modifié le ' .
+                    $dates['dateModified'] . ' à ' . $dates['timeModified'] . '</small></div>' .
+                    '<input type="hidden" class="title4js" value="' . $news->getTitle() . '"></div>';
             }
-            echo '<div class="card m-3 p-3 shadow w-auto">' .
-                '<div class="fw-bold mb-3">' . $news->getTitle() . '
-                <span class="float-end">
-                    <a href="?edit=' . $news->getId() . '" class="btn btn-sm btn-warning">Modifier</a>
-                    <a href="?delete=' . $news->getId() . '" class="btn btn-sm btn-danger delete">Supprimer</a>
-                </span></div><div>' . $content . '</div>' .
-                '<div class="text-end fst-italic text-muted fs-6"> <small>créé par <span class="fw-bold">' .
-                $news->getAuthor() . '</span> le ' . $dates['dateCreated'] . ' à ' . $dates['timeCreated'] . ', modifié le ' .
-                $dates['dateModified'] . ' à ' . $dates['timeModified'] . '</small></div>' .
-                '<input type="hidden" class="title4js" value="' . $news->getTitle() . '"></div>';
         }
         }
         }

@@ -10,7 +10,6 @@ DBFactory::createTableIfNotExistsWithPDO();
 
 $pdo = DBFactory::getMysqlConnexionWithPDO();
 
-
 $manager = new NewsManagerPDO($pdo);
 
 $page='index';
@@ -20,14 +19,20 @@ include 'component/header.php'
 <main class="container">
     <?php if (!isset($_GET['id']) || preg_match('#^[0-9]+$#', $_GET['id']) !== 1) {
         $newss = $manager->getList();
+        if(empty($newss)){
+            echo '<div class="d-grid gap-1 m-5 p-3"><a href="admin.php" class="btn btn-danger">Aucune news disponible<br>Connectez-vous dans l\'espace ' .
+                'administration  pour en créer<br><small>(identifiant : admin / Mot de passe : admin)</small></a></div>';
+        }
         foreach ($newss as $news) {
             $dates = DateManipulation::getDates($news);
             $content = $news->getContent();
             if (strlen($content) > 200) {
                 $content = substr($content, 0, 199) . '...';
             }
-            echo '<div class="card m-3 p-3 shadow w-auto">' .
-                '<div class="fw-bold"><a href="?id=' . $news->getId() . '">' . $news->getTitle() . '</a></div>' .
+            echo '<div class="card m-3 p-3 shadow w-auto news">' .
+                '<input type="hidden" name="id4js" value="'. $news->getId() .'">' .
+                '<div class="fw-bold">' . $news->getTitle() . '</div>' .
+//                '<div class="fw-bold"><a href="?id=' . $news->getId() . '">' . $news->getTitle() . '</a></div>' .
                 '<div>' . $content . '</div>' .
                 '<div class="fst-italic text-muted fs-6 mt-3">
                 <span class="float-end">
