@@ -1,8 +1,11 @@
-# Training : News
+# Training : Chat
 ## PHP - Use of databases
-Practice of PHP to use 
+
+*To practice, I rewrite the code for each project, I don't use copy/paste*.
+
+### Practice of PHP to use 
   * Databases with PDO
   * Abstract class (Entity, Manager)
   * Static methods
   
-I also used  a little bit of Bootstrap and JavaScript
+I also use a bit of Bootstrap and JavaScript
